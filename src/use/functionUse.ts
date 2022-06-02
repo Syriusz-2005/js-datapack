@@ -8,6 +8,7 @@ import { PersistentScore } from "../compilable/persistentScore";
 import { LocalFunctionCall } from "../compilable/localFunctionCall";
 import { Loggable } from "../types/loggable";
 import { Scoreboard } from "../compilable/scoreboard";
+import { ExecuteCommand } from "../compilable/executeCommand";
 
 export class FunctionUse {
   constructor( 
@@ -64,6 +65,11 @@ export class FunctionUse {
     const callingFunction = new LocalFunctionCall( functionName );
     this.compiler.assign(callingFunction);
     return callingFunction;
+  }
+
+  public defineExecute() {
+    const execute = new ExecuteCommand(this.compiler, 'execute', '');
+    return execute;
   }
 
   public run( command: ToMcCommandCompilable ) {
