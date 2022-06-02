@@ -44,12 +44,12 @@ const firstFunction = new FunctionCompiler('your_first_function', []);
 
 const score = firstFunction.use.defineScore(5, 'my-score');
 //logging score to the mc chat
-firstFunction.use.run( 'My first score is: ' );
+firstFunction.use.run( score.log( 'My first score is: ' ) );
 
 
 const firstModule = new Module('first_module', [ firstFunction ]);
 
-const mainNampespace = new Namespace('main', [ firstModule ]);
+const mainNamespace = new Namespace('main', [ firstModule ]);
 
 const firstDatapack = new Datapack({
   format: 9,
