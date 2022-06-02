@@ -5,7 +5,6 @@ import { FunctionContext } from "./types/functionContext";
 import { ModuleContext } from "./types/moduleContext";
 import { Usable } from "./types/usable";
 
-
 const onError = (_: any) => undefined;
 
 export class Module implements Usable {
@@ -59,7 +58,7 @@ export class Module implements Usable {
         })
       )
       .catch(onError);
-
+    
     for (const f of this.functions) {
       await f._compile(this.getPath(namespace, packName), functionContext );
     }
