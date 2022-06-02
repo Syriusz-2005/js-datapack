@@ -28,3 +28,30 @@ firstDatapack.compile();
 ```
 
 The code above should create a `first-datapack` directory inside of your `datapacks` folder along with the pack.mcmeta file and some additional files that are needed for the data-js-pack to work.
+
+### Creating a function
+```ts
+import Datapack, { Namespace, Module, FunctionCompiler } from 'data-js-pack';
+
+const firstFunction = new FunctionCompiler('your_first_function', []);
+
+const score = firstFunction.use.defineScore(5, 'my-score');
+//logging score to the mc chat
+firstFunction.use.run( 'My first score is: ' );
+
+
+const firstModule = new Module('first_module', [ firstFunction ]);
+
+const mainNampespace = new Namespace('main', [ firstModule ]);
+
+const firstDatapack = new Datapack({
+  format: 9,
+  name: 'first-datapack',
+  creator: 'your name here',
+  description: 'your description here',
+}, [ mainNamespace ]);
+
+//In order to compile the datapack you need to use the compile() method
+
+firstDatapack.compile();
+```
