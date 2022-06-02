@@ -1,6 +1,6 @@
 {
   "name": "data-js-pack",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "It allows creating a minecraft datapack using a declarative js syntax",
   "main": "./lib/index.js",
   "scripts": {
