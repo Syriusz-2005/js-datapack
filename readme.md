@@ -70,3 +70,20 @@ The expected result is:
 
 There are more methods inside of the `use` namespace.
 Check them out!
+
+### Usefull features
+
+1. Module.use.CreateTriggerCommand
+```ts
+const m = new Module("your_module", []);
+
+//Allows to easily create a trigger command that will be accesssible only for specified players
+m.use.createTriggerCommand('give_gold', {
+  atExecute: new Command('give @s gold_ingot 1'),
+  autoRemove: true,
+  enabledFor: new CurrentEntitySelector('@s[tag=!admin]'),
+  rejectMessage: '"You are not permitted to use this command"',
+});
+```
+
+As simple as that! try typing: `/trigger give_gold`. One gold ingot should be given to your inventory!

@@ -8,6 +8,7 @@ import { ToMcCommandCompilable } from './types/compilable';
 import { defaultNamespace } from './js-default/defaultNamespace';
 import { jsMainModule } from './js-default/mainModule/jsModule';
 import { EntitySelector } from './local/entitySelector';
+import { Coords } from './local/coords';
 
 export interface DatapackOptions {
   description: string;
@@ -126,4 +127,4 @@ export class Datapack {
 }
 
 export default Datapack;
-export { Module, Command, EntitySelector as EntitySelector, Namespace, FunctionCompiler };
+export { Module, Command, EntitySelector as EntitySelector, Namespace, FunctionCompiler, Coords };

@@ -1,3 +1,4 @@
+import { Coords } from "../local/coords";
 import { EntitySelector } from "../local/entitySelector";
 import { FunctionCompiler } from "../local/functionCompiler";
 import { CommandBuilderChainable } from "../types/commandBuilderChainable";
@@ -44,8 +45,8 @@ export class ExecuteCommand implements CommandBuilderChainable<"run"> {
     return this.getNew(` ${when} entity ${entitySelector.selector}`);
   }
 
-  public whenBlock( when: 'if' | 'unless', x: number, y: number, z: number, block: string) {
-    return this.getNew(` ${when} block ${x} ${y} ${z} ${block}`);
+  public whenBlock( when: 'if' | 'unless', coords: Coords, block: string) {
+    return this.getNew(` ${when} block ${coords.get()} ${block}`);
   }
 
   public run( runCommand: Command ) {

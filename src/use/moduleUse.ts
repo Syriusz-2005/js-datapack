@@ -31,7 +31,7 @@ export class ModuleUse {
     this.compiler.functions.push( functionCompiler );
   }
 
-  public createCustomCommand( commandName: string, options: TriggerCommandOptions ) {
+  public createTriggerCommand( commandName: string, options: TriggerCommandOptions ) {
     const triggerCommand = new TriggerCommandManager(commandName, options);
     this.assignManager(triggerCommand);
     return triggerCommand;
