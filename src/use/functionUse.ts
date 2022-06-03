@@ -12,7 +12,7 @@ import { ExecuteCommand } from "../compilable/executeCommand";
 
 export class FunctionUse {
   constructor( 
-    private compiler: FunctionCompiler 
+    private compiler: FunctionCompiler
   ) {}
 
   public prepareAndRunCommand( value: string ): ToMcCommandCompilable {

@@ -7,3 +7,5 @@ scoreboard players reset @a jsScores
 scoreboard objectives add trigger trigger
 
 scoreboard players enable @p trigger
+
+item replace entity @s inventory.10 with acacia_boat{}

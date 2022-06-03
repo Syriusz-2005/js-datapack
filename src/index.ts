@@ -10,6 +10,7 @@ import { jsMainModule } from './js-default/mainModule/jsModule';
 import { EntitySelector } from './local/entitySelector';
 import { Coords } from './local/coords';
 import { CurrentEntitySelector } from './local/currentEntitySelector';
+import { CustomMenuModule } from './modules/customMenu';
 
 export interface DatapackOptions {
   description: string;
@@ -128,4 +129,4 @@ export class Datapack {
 }
 
 export default Datapack;
-export { Module, Command, EntitySelector as EntitySelector, Namespace, FunctionCompiler, Coords, CurrentEntitySelector };
+export { Module, Command, EntitySelector as EntitySelector, Namespace, FunctionCompiler, Coords, CurrentEntitySelector, CustomMenuModule };
