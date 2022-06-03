@@ -3,6 +3,9 @@ import { EntitySelector } from "../local/entitySelector";
 import { FunctionCompiler } from "../local/functionCompiler";
 import { CommandBuilderChainable } from "../types/commandBuilderChainable";
 import { Command } from "./command";
+import { Scoreboard } from "./scoreboard";
+
+export type WhenTypes = 'if' | 'unless';
 
 
 /**
@@ -41,12 +44,22 @@ export class ExecuteCommand implements CommandBuilderChainable<"run"> {
     return this.getNew(` as ${entitySelector.selector}`);
   }
 
-  public whenEntity( when: 'if' | 'unless', entitySelector: EntitySelector ) {
+  public whenEntity( when: WhenTypes, entitySelector: EntitySelector ) {
     return this.getNew(` ${when} entity ${entitySelector.selector}`);
   }
 
-  public whenBlock( when: 'if' | 'unless', coords: Coords, block: string) {
+  public whenBlock( when: WhenTypes, coords: Coords, block: string) {
     return this.getNew(` ${when} block ${coords.get()} ${block}`);
+  }
+
+  public whenScore( when: WhenTypes, extra: {
+    firstEntity: EntitySelector,
+    firstScoreboard: string | Scoreboard,
+    operator: '=' | '<' | '>' | '<=' | '>=',
+    secondEntity: EntitySelector,
+    secondScoreboard: string | Scoreboard,
+  }) {
+    return this.getNew(` ${when} score ${extra.firstEntity.selector} ${extra.operator} ${extra.secondEntity.selector} ${extra.secondScoreboard}`)
   }
 
   public run( runCommand: Command ) {
