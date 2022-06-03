@@ -8,7 +8,7 @@ import { Command } from "./command";
  * nice
  * @implements {Chainable} s
  */
-export class ExecuteCommand implements CommandBuilderChainable {
+export class ExecuteCommand implements CommandBuilderChainable<"run"> {
   public generatedBy: string = "ExecuteCommand Chainable class";
   private command: string;
 
@@ -48,7 +48,7 @@ export class ExecuteCommand implements CommandBuilderChainable {
     return this.getNew(` ${when} block ${x} ${y} ${z} ${block}`);
   }
 
-  public end( runCommand: Command ) {
+  public run( runCommand: Command ) {
     this.functionCompiler.assign( new Command(`${this.command} run ${runCommand.compile()}`) );
   }
 }
