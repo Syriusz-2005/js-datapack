@@ -1,25 +1,27 @@
 import { EntitySelector } from "../local/entitySelector";
 import { FunctionCompiler } from "../local/functionCompiler";
 import { CommandBuilderChainable } from "../types/commandBuilderChainable";
-import { CommandContext } from "../types/commandContext";
-import { ToMcCommandCompilable } from "../types/compilable";
 import { Command } from "./command";
 
 
-
-export class ExecuteCommand extends Command implements ToMcCommandCompilable, CommandBuilderChainable {
+/**
+ * nice
+ * @implements {Chainable} s
+ */
+export class ExecuteCommand implements CommandBuilderChainable {
   public generatedBy: string = "ExecuteCommand Chainable class";
+  private command: string;
 
   constructor(
     private functionCompiler: FunctionCompiler,
     before: string,
     extra?: string,
   ) {
-    super(before + extra);
+    this.command = before + extra;
   }
 
   private get current() {
-    return this.value;
+    return this.command;
   }
 
   private getNew(extra: string) {
@@ -46,12 +48,7 @@ export class ExecuteCommand extends Command implements ToMcCommandCompilable, Co
     return this.getNew(` ${when} block ${x} ${y} ${z} ${block}`);
   }
 
-  public end() {
-    this.functionCompiler.assign( this );
-    return this;
-  }
-
-  public override compile(_?: CommandContext | undefined): string {
-    return this.value;
+  public end( runCommand: Command ) {
+    this.functionCompiler.assign( new Command(`${this.command} run ${runCommand.compile()}`) );
   }
 }

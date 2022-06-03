@@ -3,7 +3,7 @@
 
 export class EntitySelector {
   constructor(
-    private _selector: string,
+    private _selector: `@${string}`,
   ) {}
 
   public get selector() {

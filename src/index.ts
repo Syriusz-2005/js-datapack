@@ -126,4 +126,4 @@ export class Datapack {
 }
 
 export default Datapack;
-export { Module, Command, EntitySelector as Entity, Namespace, FunctionCompiler };
+export { Module, Command, EntitySelector as EntitySelector, Namespace, FunctionCompiler };
