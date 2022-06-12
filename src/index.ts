@@ -98,7 +98,7 @@ export class Datapack {
         description: this.options.description,
       },
       creator: this.options.creator,
-      createdWith: 'js-datapack',
+      createdWith: 'data-js-pack',
     }));
 
     const moduleLoadRunners: ToMcCommandCompilable[] = [];

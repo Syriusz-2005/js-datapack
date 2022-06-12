@@ -1,6 +1,5 @@
 import { Command } from "../compilable/command";
 import { CustomMenuModule } from "../modules/customMenu";
-import { ModuleUse } from "./moduleUse";
 
 export type RunCommandViewItemClickAction = {
   type: 'runCommand';
@@ -25,13 +24,12 @@ export type ViewProps = {
   items: ViewItem[];
 }
 
-export class CustomMenuUse extends ModuleUse {
+export class CustomMenuUse {
   private customMenu: CustomMenuModule;
 
   constructor(
     compiler: CustomMenuModule,
   ) {
-    super(compiler);
     this.customMenu = compiler;
   }
 

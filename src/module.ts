@@ -1,16 +1,10 @@
-import * as fs from "fs/promises";
 import { FunctionCompiler } from "./local/functionCompiler";
 import { ModuleUse } from "./use/moduleUse";
-import { FunctionContext } from "./types/functionContext";
-import { ModuleContext } from "./types/moduleContext";
 import { Usable } from "./types/usable";
+import { AbstractModule } from "./modules/moduleCompilable";
 
-const onError = (_: any) => undefined;
-
-export class Module implements Usable {
+export class Module extends AbstractModule implements Usable {
   public use: ModuleUse = new ModuleUse( this );
-  public loadFunction: FunctionCompiler = new FunctionCompiler('js_at_load', []);
-  public tickFunction: FunctionCompiler = new FunctionCompiler('js_at_tick', []);
   
   /**
  * A virtual storage for some functions that usually are focued on one specific feature
@@ -33,36 +27,9 @@ export class Module implements Usable {
  * Using `use` methods is the safest and easiest way to modify some params in any object that supports it.
  */
   constructor(
-    public readonly name: string,
+    name: string,
     public functions: FunctionCompiler[],
-  ) {}
-
-  private getPath(namespace: string, packName: string) {
-    return `../${packName}/data/${namespace}/functions/${this.name}`;
-  }
-
-  public async _compile( context: ModuleContext ) {
-    const { namespace: { name: namespace }, pack: { options: { name: packName } } } = context;
-    const functionContext: FunctionContext = { ...context, module: this };
-
-    await fs.mkdir(this.getPath(namespace, packName)).catch(onError);
-
-    await fs
-      .writeFile(
-        `${this.getPath(namespace, packName)}/mdinfo.json`,
-        JSON.stringify({
-          namespace,
-          module: this.name,
-          lastCompiled: new Date(),
-          functions: this.functions.map( f => f.name ),
-        })
-      )
-      .catch(onError);
-    
-    for (const f of this.functions) {
-      await f._compile(this.getPath(namespace, packName), functionContext );
-    }
-    await this.tickFunction._compile(this.getPath(namespace, packName), functionContext );
-    await this.loadFunction._compile(this.getPath(namespace, packName), functionContext );
+  ) {
+    super(name);
   }
 }
